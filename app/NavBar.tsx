@@ -18,7 +18,7 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="flex border-b mb-5 px-5 h-16 items-center justify-between">
+      <nav className="flex border-b mb-2 px-5 h-16 items-center justify-between">
         <div className="flex space-x-6 items-center">
           <button
             onClick={toggleSidebar}
@@ -49,7 +49,6 @@ const NavBar = () => {
           <p>hello</p>
         </div>
       </nav>
-      {/* <Drawer closeSidebar={toggleSidebar} isOpen={isSidebarOpen} /> */}
       <SideBar closeSidebar={toggleSidebar} isOpen={isSidebarOpen} />
     </>
   );

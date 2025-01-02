@@ -30,7 +30,14 @@ export default function RootLayout({
       >
         <NavBar />
 
-        <main>{children}</main>
+        <main
+          style={{
+            marginLeft: "64px", // Set margin-left to X
+            width: `calc(100vw - 64px)`, // Full width minus X
+          }}
+        >
+          {children}
+        </main>
       </body>
     </html>
   );
