@@ -13,6 +13,9 @@ import {
   AiOutlineShoppingCart,
   AiOutlineFileText,
   AiOutlineMoon,
+  AiOutlineMenu,
+  AiOutlineWallet,
+  AiOutlineSafetyCertificate,
 } from "react-icons/ai";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 
@@ -58,112 +61,213 @@ const SideBar: React.FC<Props> = ({ closeSidebar, isOpen }) => {
   return (
     <div
       className={`fixed left-0 w-64 bg-gray-100 border-r px-5 py-5 z-40 shadow-lg transform transition-transform duration-300 ${
-        isOpen ? "translate-x-0" : "-translate-x-full"
+        isOpen ? "translate-x-0" : "-translate-x-3/4"
       }`}
       style={{ top: "64px", height: "calc(100vh - 64px)" }} // Adjust top for navbar height
     >
-      <div className="flex items-center justify-between mb-5">
-        <h2 className="text-lg font-bold text-zinc-800">Menu</h2>
-        <button
-          onClick={closeSidebar}
-          className="text-zinc-500 hover:text-zinc-800 transition-colors"
-        >
-          <AiOutlineClose size={20} />
-        </button>
-      </div>
-
-      {/* Main Links */}
-      <ul className="space-y-4">
-        {links.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className="flex items-center text-zinc-500 hover:text-zinc-800 transition-colors"
+      {isOpen ? (
+        <div>
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="text-lg font-bold text-zinc-800">Menu</h2>
+            <button
+              onClick={closeSidebar}
+              className="text-zinc-500 hover:text-zinc-800 transition-colors"
             >
-              {link.icon && <link.icon size={20} className="mr-2" />}
-              {link.label}
-            </Link>
-          </li>
-        ))}
-        {/* Dropdown Menu */}
+              <AiOutlineClose size={20} />
+            </button>
+          </div>
 
-        {/* Active Wallet Dropdown */}
-        <li>
-          <button
-            onClick={toggleActiveWallet}
-            className={`flex items-center w-full text-zinc-500 ${
-              activeWalletOpen && "text-zinc-800"
-            } hover:text-zinc-800 transition-colors`}
-          >
-            Active Wallet
-            {activeWalletOpen ? (
-              <BsChevronUp className="ml-auto" />
-            ) : (
-              <BsChevronDown className="ml-auto" />
-            )}
-          </button>
-          {activeWalletOpen && (
-            <ul className="ml-4 mt-2 space-y-2">
-              {activeWalletChildren.map((child) => (
-                <li key={child.href}>
-                  <Link
-                    href={child.href}
-                    className="flex text-zinc-500 hover:text-zinc-800 transition-colors"
-                  >
-                    {child.icon && <child.icon size={20} className="mr-2" />}
-                    {child.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
+          {/* Main Links */}
+          <ul className="space-y-5">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="flex items-center text-zinc-500 hover:text-zinc-800 transition-colors"
+                >
+                  {link.icon && <link.icon size={20} className="mr-2" />}
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            {/* Dropdown Menu */}
 
-        {/* Vault Dropdown */}
-        <li>
-          <button
-            onClick={toggleVault}
-            className={`flex items-center w-full text-zinc-500 ${
-              vaultOpen && "text-zinc-800"
-            } hover:text-zinc-800 transition-colors`}
-          >
-            Vault
-            {vaultOpen ? (
-              <BsChevronUp className="ml-auto" />
-            ) : (
-              <BsChevronDown className="ml-auto" />
-            )}
-          </button>
-          {vaultOpen && (
-            <ul className="ml-4 mt-2 space-y-2">
-              {vaultChildren.map((child) => (
-                <li key={child.href}>
-                  <Link
-                    href={child.href}
-                    className="flex text-zinc-500 hover:text-zinc-800 transition-colors"
-                  >
-                    {child.icon && <child.icon size={20} className="mr-2" />}
-                    {child.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </li>
-      </ul>
+            {/* Active Wallet Dropdown */}
+            <li>
+              <button
+                onClick={toggleActiveWallet}
+                className={`flex items-center w-full text-zinc-500 ${
+                  activeWalletOpen && "text-zinc-800"
+                } hover:text-zinc-800 transition-colors`}
+              >
+                Active Wallet
+                {activeWalletOpen ? (
+                  <BsChevronUp className="ml-auto" />
+                ) : (
+                  <BsChevronDown className="ml-auto" />
+                )}
+              </button>
+              {activeWalletOpen && (
+                <ul className="ml-4 mt-2 space-y-2">
+                  {activeWalletChildren.map((child) => (
+                    <li key={child.href}>
+                      <Link
+                        href={child.href}
+                        className="flex text-zinc-500 hover:text-zinc-800 transition-colors"
+                      >
+                        {child.icon && (
+                          <child.icon size={20} className="mr-2" />
+                        )}
+                        {child.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
 
-      {/* Logout Button */}
-      <div className="flex items-center justify-between mt-5">
-        <button
-          onClick={() => console.log("logout")}
-          className="text-zinc-500 flex items-center hover:text-zinc-800 transition-colors"
-        >
-          <AiOutlineLogout size={20} />
-          <span className="ml-3 font-semibold text-zinc-500 hover:text-zinc-800 transition-colors">
-            Log Out
-          </span>
-        </button>
-      </div>
+            {/* Vault Dropdown */}
+            <li>
+              <button
+                onClick={toggleVault}
+                className={`flex items-center w-full text-zinc-500 ${
+                  vaultOpen && "text-zinc-800"
+                } hover:text-zinc-800 transition-colors`}
+              >
+                Vault
+                {vaultOpen ? (
+                  <BsChevronUp className="ml-auto" />
+                ) : (
+                  <BsChevronDown className="ml-auto" />
+                )}
+              </button>
+              {vaultOpen && (
+                <ul className="ml-4 mt-2 space-y-2">
+                  {vaultChildren.map((child) => (
+                    <li key={child.href}>
+                      <Link
+                        href={child.href}
+                        className="flex text-zinc-500 hover:text-zinc-800 transition-colors"
+                      >
+                        {child.icon && (
+                          <child.icon size={20} className="mr-2" />
+                        )}
+                        {child.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          </ul>
+
+          {/* Logout Button */}
+          <div className="flex items-center justify-between mt-5">
+            <button
+              onClick={() => console.log("logout")}
+              className="text-zinc-500 flex items-center hover:text-zinc-800 transition-colors"
+            >
+              <AiOutlineLogout size={20} />
+              <span className="ml-3 font-semibold text-zinc-500 hover:text-zinc-800 transition-colors">
+                Log Out
+              </span>
+            </button>
+          </div>
+        </div>
+      ) : (
+        // only showing Icons
+        <div>
+          <div className="flex items-center justify-end mb-6">
+            <button
+              onClick={closeSidebar}
+              className="text-zinc-500 hover:text-zinc-800 transition-colors"
+            >
+              <AiOutlineMenu size={23} />
+            </button>
+          </div>
+
+          {/* Main Links */}
+          <ul className="space-y-6">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="flex items-center justify-end text-zinc-500 hover:text-zinc-800 transition-colors"
+                >
+                  {link.icon && <link.icon size={22} />}
+                </Link>
+              </li>
+            ))}
+            {/* Dropdown Menu */}
+
+            {/* Active Wallet Dropdown */}
+            <li>
+              <button
+                onClick={toggleActiveWallet}
+                className={`flex items-center justify-end w-full text-zinc-500 ${
+                  activeWalletOpen && "text-zinc-800"
+                } hover:text-zinc-800 transition-colors`}
+              >
+                <AiOutlineWallet size={22} />
+              </button>
+              {activeWalletOpen && (
+                <ul className="ml-4 mt-2 space-y-3">
+                  {activeWalletChildren.map((child) => (
+                    <li key={child.href}>
+                      <Link
+                        href={child.href}
+                        className="flex justify-end text-zinc-500 hover:text-zinc-800 transition-colors"
+                      >
+                        {child.icon && (
+                          <child.icon size={18} className="ml-4" />
+                        )}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+
+            {/* Vault Dropdown */}
+            <li>
+              <button
+                onClick={toggleVault}
+                className={`flex items-center justify-end w-full text-zinc-500 ${
+                  vaultOpen && "text-zinc-800"
+                } hover:text-zinc-800 transition-colors`}
+              >
+                <AiOutlineSafetyCertificate size={22} />
+              </button>
+              {vaultOpen && (
+                <ul className="ml-4 mt-2 space-y-3">
+                  {vaultChildren.map((child) => (
+                    <li key={child.href}>
+                      <Link
+                        href={child.href}
+                        className="flex justify-end text-zinc-500 hover:text-zinc-800 transition-colors"
+                      >
+                        {child.icon && (
+                          <child.icon size={18} className="ml-4" />
+                        )}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          </ul>
+
+          {/* Logout Button */}
+          <div className="flex items-center justify-end mt-5">
+            <button
+              onClick={() => console.log("logout")}
+              className="text-zinc-500 flex items-center hover:text-zinc-800 transition-colors"
+            >
+              <AiOutlineLogout size={23} />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { AiOutlineMenu } from "react-icons/ai";
 import SideBar from "./SideBar";
 import Link from "next/link";
 import Image from "next/image";
@@ -50,6 +49,7 @@ const NavBar = () => {
           <p>hello</p>
         </div>
       </nav>
+      {/* <Drawer closeSidebar={toggleSidebar} isOpen={isSidebarOpen} /> */}
       <SideBar closeSidebar={toggleSidebar} isOpen={isSidebarOpen} />
     </>
   );
